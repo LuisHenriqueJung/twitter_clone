@@ -27,7 +27,15 @@
 				$('#btn_tweet').click( function(){
 					
 					if($('#text_tweet').val().length > 0){
-						alert('peadada');
+						
+						$.ajax({
+							url: 'inclui_tweet.php',
+							method: 'post',
+							data: {texto_tweet: $('#text_tweet').val() },
+							success: function(data){
+								alert('Tweet publicado com sucesso!');
+							}
+						});
 					}
 				});
 			});
