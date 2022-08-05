@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario'])) {
 <head>
 	<meta charset="UTF-8">
 
-	<title>Twitter - Home</title>
+	<title>Twitter - Pesquisar</title>
 
 	<!-- jquery - link cdn -->
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -25,35 +25,25 @@ if (!isset($_SESSION['usuario'])) {
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#btn_tweet').click(function() {
+			$('#btn_procurar_pessoa').click(function() {
 
-				if ($('#text_tweet').val().length > 0) {
+				if ($('#nome_pessoa').val().length > 0) {
 
 					$.ajax({
-						url: 'inclui_tweet.php',
+						url: 'get_pessoas.php',
 						method: 'post',
-						data: {
-							texto_tweet: $('#text_tweet').val()
-						},
+						data: $('#nome_pessoa').serialize(),
 						success: function(data) {
-							atualizaTweet();
+							$('#pessoas').html(data);
+							$('.btn_seguir').click( function(){
+								var id_usuario = $(this).data('id_usuario');
+								alert (id_usuario);
+							})
+
 						}
 					});
 				}
 			});
-
-			function atualizaTweet() {
-				
-				$.ajax({
-					url: 'get_tweet.php',
-					success: function(data){
-						$('#tweets').html(data);
-					}
-				})
-
-			}
-			atualizaTweet() 
-
 		});
 	</script>
 
@@ -77,6 +67,7 @@ if (!isset($_SESSION['usuario'])) {
 
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+                <li><a href="home.php">Home</a></li>
 					<li><a href="sair.php">Sair</a></li>
 				</ul>
 			</div>
@@ -105,22 +96,21 @@ if (!isset($_SESSION['usuario'])) {
 		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="input-group">
-						<input type="text" id="text_tweet" class="form-control" placeholder="O que está acontecendo agora?" maxlength="140" />
+					<div class="input-group">                               
+						<input type="text" id="nome_pessoa" name="nome_pessoa" class="form-control" placeholder="Quem você está procurando?" maxlength="140" />
 						<span class="input-group-btn">
-							<button id="btn_tweet" class="btn btn-primary" type="button">Tweet</button>
+							<button id="btn_procurar_pessoa" class="btn btn-primary" type="button">Procurar</button>
 						</span>
 					</div>
 				</div>
 			</div>
 
-			<div id="tweets" class="list-group"></div>
+			<div id="pessoas" class="list-group"></div>
 
 		</div>
 		<div class="col-md-3">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h4><a href="procurar_pessoas.php">Encontrar pessoas</a></h4>
 				</div>
 			</div>
 		</div>
