@@ -1,6 +1,9 @@
 <?php
-$erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
+
+	$erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
+
 ?>
+
 
 <!DOCTYPE HTML>
 <html lang="pt-br">
@@ -16,29 +19,30 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	
 		<script>
-			// código javascript
-				$(document).ready(function(){
-					$('#btn_login').click(function(){
+			$(document).ready( function(){
+
+				//verificar se os campos de usuário e senha foram devidamente preenchidos
+				$('#btn_login').click(function(){
 
 					var campo_vazio = false;
 
-					if($('#campo_usuario').val() ==''){
+					if($('#campo_usuario').val() == ''){
 						$('#campo_usuario').css({'border-color': '#A94442'});
 						campo_vazio = true;
-					}else{
+					} else {
 						$('#campo_usuario').css({'border-color': '#CCC'});
 					}
-					if($('#campo_senha').val() ==''){
+
+					if($('#campo_senha').val() == ''){
 						$('#campo_senha').css({'border-color': '#A94442'});
 						campo_vazio = true;
-					}else{
+					} else {
 						$('#campo_senha').css({'border-color': '#CCC'});
 					}
 
 					if(campo_vazio) return false;
-
 				});
-});					
+			});					
 		</script>
 	</head>
 
@@ -80,10 +84,11 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 								<br /><br />
 								
 							</form>
+
 							<?php
-							if($erro == 1){
-								echo '<font color ="#FF0000"> Usuário ou senha inválidos </font>';
-							}
+								if($erro == 1){
+									echo '<font color="#FF0000">Usuário e ou senha inválido(s)</font>';
+								}
 							?>
 
 						</form>
@@ -98,8 +103,8 @@ $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 	    <div class="container">
 
 	      <!-- Main component for a primary marketing message or call to action -->
-	      <div class="jumbotron">
-	        <h1>Bem vindo ao twitter clone</h1>
+	      <div class="jumbotron" style="background: ;" >
+	        <h2>Bem vindo ao twitter clone</h2>
 	        <p>Veja o que está acontecendo agora...</p>
 	      </div>
 
